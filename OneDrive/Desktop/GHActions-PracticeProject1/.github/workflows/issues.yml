@@ -1,0 +1,19 @@
+name: Issues - Echo Event Details
+
+on:
+  issues:
+    types: [opened, edited, closed, reopened, labeled, unlabeled, assigned, unassigned]
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print quick info
+        run: |
+          echo "Action: ${{ github.event.action }}"
+          echo "Issue #: ${{ github.event.issue.number }}"
+          echo "Title: ${{ github.event.issue.title }}"
+          echo "By: ${{ github.actor }}"
+
+      - name: Dump full event payload
+         run: echo '${{ toJson(github.event) }}'
